@@ -1,12 +1,12 @@
-## Docker Nginx SSL failing:
+# Docker Nginx SSL failing:
 
-# Building the Dockerfile locally
+## Building the Dockerfile locally
 
 ```bash
 docker build . -f Dockerfile -t nginxphpbb
 ```
 
-# Setting up SSL:
+## Setting up SSL:
 
 ```bash
 export SERVER_NAME='localhost'
@@ -18,10 +18,12 @@ openssl req -nodes -x509 -newkey rsa:2048 \
   -out ssl/default.crt
 ```
 
-# Running the Docker container
+## Running the Docker container
 
+```bash
 docker run \
 -p 443:443 \
 --restart always \
 --name nginxphpbb \
 nginxphpbb
+```
