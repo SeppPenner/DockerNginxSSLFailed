@@ -1,5 +1,9 @@
 # Docker Apache with SSL and phpBB installed
 
+This is not maintained and for reference only. New repository is here: https://github.com/SeppPenner/DockerApacheSSLphpBB
+
+
+
 ## 1. Export all your previous existing data from Mysql:
 https://dev.mysql.com/doc/workbench/en/wb-admin-export-import-management.html
 
