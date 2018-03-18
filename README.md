@@ -72,7 +72,9 @@ rm -rf install
 
 ## 10. Replay all your exported data (Same way as with the export but of course vice versa).
 
-## Useful other stuff-Remove all images and containers from Docker:
+## Useful other stuff
+
+### Remove all images and containers from Docker:
 https://techoverflow.net/2013/10/22/docker-remove-all-images-and-containers/
 
 ```bash
@@ -81,5 +83,13 @@ docker rm $(docker ps -a -q)
 # Delete all images
 docker rmi $(docker images -q)
 ```
+
+### GMX SMP data:
+https://hilfe.gmx.net/pop-imap/pop3/serverdaten.html
+
+mail.gmx.net
+
+587
+
 
 This image is based on https://github.com/blueimp/phpbb.
