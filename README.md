@@ -1,4 +1,4 @@
-# Docker Apache with phpBB installed:
+# Docker Apache with SSL and phpBB installed
 
 ## 1. Export all your previous existing data from Mysql:
 https://dev.mysql.com/doc/workbench/en/wb-admin-export-import-management.html
@@ -74,3 +74,12 @@ rm -rf install
 
 ## Useful other stuff-Remove all images and containers from Docker:
 https://techoverflow.net/2013/10/22/docker-remove-all-images-and-containers/
+
+```bash
+# Delete all containers
+docker rm $(docker ps -a -q)
+# Delete all images
+docker rmi $(docker images -q)
+```
+
+This image is based on https://github.com/blueimp/phpbb.
