@@ -1,7 +1,13 @@
-# Docker Nginx SSL failing:
+# Docker Apache with phpBB installed:
 
-## 1. Setting up SSL:
+## 1. Export all your previous existing data from Mysql:
+https://dev.mysql.com/doc/workbench/en/wb-admin-export-import-management.html
 
+or
+
+https://www.itworld.com/article/2833078/it-management/3-ways-to-import-and-export-a-mysql-database.html
+
+## 2. Setting up SSL:
 ```bash
 export SERVER_NAME='localhost'
 mkdir ssl
@@ -12,18 +18,55 @@ openssl req -nodes -x509 -newkey rsa:2048 \
   -out ssl/default.crt
 ```
 
-## 2. Building the Dockerfile locally
-
+## 3. Setting the execute flags to the bin directories stuff:
 ```bash
-docker build . -f Dockerfile -t nginxphpbb
+chmod +x /bin/download-phpbb
+chmod +x /bin/phpbb-apache2
 ```
 
-## 3. Running the Docker container
+## 4. Change the options in the Dockerfile as you need:
+DBHOST=192.168.2.205
+DBPORT=3307
+DBNAME=phpBB
+DBUSER=default
+TABLE_PREFIX=phpbb_
 
+## 5. Building the Dockerfile locally
 ```bash
-docker run \
+docker build . -f Dockerfile -t phpbb
+```
+
+## 6. Running the Docker container (Change "password" to your database password):
+```bash
+docker run -d \
+-v "$PWD/ssl:/etc/apache2/ssl" \
+-e SERVER_NAME=localhost \
+-e DBPASSWD=password \
 -p 443:443 \
 --restart always \
---name nginxphpbb \
-nginxphpbb
+--name phpbb \
+phpbb
 ```
+
+## 7. Access it via https://YourHostOrIp:443 (Change "YourHostOrIp" to your server address, of course)
+
+## 8. Do the configuration manually (At least it did not work for me in another way):
+You might need to delete the database and create a new one (phpBB says that tables with the database prefix already exists):
+```SQL
+DROP DATABASE phpBB;
+CREATE DATABASE phpBB;
+```
+
+## 9. Remove the install directory from the docker container:
+```bash
+docker exec -t -i phpbb /bin/bash
+# In the container navigate to:
+cd /var/www/html/phpbb 
+# Delete the install directory:
+rm -rf install
+```
+
+## 10. Replay all your exported data (Same way as with the export but of course vice versa).
+
+## Useful other stuff-Remove all images and containers from Docker:
+https://techoverflow.net/2013/10/22/docker-remove-all-images-and-containers/
