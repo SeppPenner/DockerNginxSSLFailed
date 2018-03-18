@@ -26,9 +26,13 @@ chmod +x /bin/phpbb-apache2
 
 ## 4. Change the options in the Dockerfile as you need:
 DBHOST=192.168.2.205
+
 DBPORT=3307
+
 DBNAME=phpBB
+
 DBUSER=default
+
 TABLE_PREFIX=phpbb_
 
 ## 5. Building the Dockerfile locally
