@@ -91,7 +91,7 @@ docker rm $(docker ps -a -q)
 docker rmi $(docker images -q)
 ```
 
-### GMX SMP data:
+### GMX SMTP data:
 https://hilfe.gmx.net/pop-imap/pop3/serverdaten.html
 
 mail.gmx.net
